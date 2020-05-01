@@ -1,4 +1,4 @@
-export enum LogSeverity {
+export enum ZLogSeverity {
 	Critical = 'Critical',
 	Error = 'Error',
 	Warning = 'Warning',

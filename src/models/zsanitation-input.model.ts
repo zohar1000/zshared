@@ -1,4 +1,4 @@
-export interface SanitationInput {
+export interface ZSanitationInput {
   name: string;
   value: string;
   label?: string;

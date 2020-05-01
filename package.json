@@ -1,11 +1,23 @@
 {
   "name": "zshared",
-  "description": "shared typescript code for client and server",
-  "version": "1.0.0",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "description": "useful common javascript/typescript utilities I collected over the years",
+  "version": "1.0.2",
+  "main": "lib",
+  "types": "lib",
+  "module": "es",
+  "exports": {
+    ".": [
+      {
+        "import": "./es/index.mjs",
+        "require": "./lib/index.js",
+        "default": "./lib/index.js"
+      },
+      "./lib/index.js"
+    ]
+  },
   "scripts": {
-    "build": "tsc",
+    "build": "ts-hybrid-esm-build --clean",
+    "old-build": "tsc",
     "preversion": "npm run lint",
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
@@ -13,24 +25,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/zohar1000/zshared-ts.git"
+    "url": "https://github.com/zohar1000/zutilities.git"
   },
   "files": [
-    "lib/**/*"
+    "lib/**/*",
+    "es/**/*"
   ],
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/zohar1000/zshared-ts/issues"
+    "url": "https://github.com/zohar1000/zutilities/issues"
   },
-  "homepage": "https://github.com/zohar1000/zshared-ts",
+  "homepage": "https://github.com/zohar1000/zutilities",
   "devDependencies": {
-    "@types/node": "^12.6.8",
-    "tslint": "^5.17.0",
-    "tslint-config-prettier": "^1.18.0",
-    "typescript": "^3.5.1"
-  },
-  "dependencies": {},
-  "peerDependencies": {}
+    "ts-hybrid-esm-build": "^0.2.3"
+  }
 }

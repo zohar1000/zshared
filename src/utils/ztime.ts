@@ -1,45 +1,42 @@
-import { StringUtils } from './string.utils';
+import { ZtimeOpts } from '../models/ztime-opts.model';
 
-export class TimeUtils {
+export class ZTime {
+	static ONE_MINUTE_IN_MS = 60000;
+	static ONE_HOUR_IN_MS = 3600000;
+	static ONE_DAY_IN_MS = 86400000;
+	static DUME_DAY_EPOCH = 9999999999999;
 
 	/*************************************/
 	/*  general function                 */
 	/*************************************/
 
-	static sleep(time) {
+	static sleep(time: number): Promise<undefined> {
 		return new Promise<any>((resolve, reject) => {
 			setTimeout(resolve, time);
 		});
 	}
 
-
 	/***************************/
 	/*   UTC time functions    */
 	/***************************/
 
-	static getUtcEpoch(d: Date = new Date()) {
+	static utcEpoch(d: Date = new Date()) {
 		return d.getTime();
 	}
 
 	// opts: isUndashed (boolean) - to replace dashes with spaces, default false
-	static getUtcUniDate(d: Date = new Date(), opts: any = {}): string {
+	static utcUniDate(d: Date = new Date(), opts: ZtimeOpts = {}): string {
 		let uniDate = d.toISOString().substr(0, 10);
 		if (opts.isUndashed) uniDate = uniDate.replace(/-/g, ' ');
 		return uniDate;
 	}
 
-	// opts: isMs (boolean) - include milliseconds, default false
-	static getUtcUniDateTime(d: Date = new Date(), opts: any = {}): string {
-		const len = opts.isMs ? 23 : 19;
-		return d.toISOString().substr(0, len).replace('T', ' ');
+	static utcUniDateTime(d: Date = new Date(), opts: ZtimeOpts = {}): string {
+		return d.toISOString().substr(0, 19).replace('T', ' ');
 	}
 
-	static getUtcCurrUniDate(opts: any = {}): string {
-		return TimeUtils.getUtcUniDate(new Date(), opts);
-	}
-
-	static getUtcCurrUniDateTime(opts: any = {}): string {
-		return TimeUtils.getUtcUniDateTime(new Date(), opts);
+	static utcUniDateTimeMs(d: Date = new Date(), opts: ZtimeOpts = {}): string {
+		return d.toISOString().substr(0, 23).replace('T', ' ');
 	}
 
 
@@ -47,28 +44,24 @@ export class TimeUtils {
 	/*   local time functions    */
 	/*****************************/
 
-	static getLocalEpoch(d: Date = new Date()) {
-		return d.getTime() - d.getTimezoneOffset() * 60 * 1000;
+	static localEpoch(d: Date = new Date()) {
+		return d.getTime() - d.getTimezoneOffset() * 60000;
 	}
 
-	static getLocalDate(d: Date = new Date()) {
-		return new Date(TimeUtils.getLocalEpoch(d));
+	static localDate(d: Date = new Date()) {
+		return new Date(ZTime.localEpoch(d));
 	}
 
-	static getLocalUniDate(d: Date = new Date(), opts: any = {}): string {
-		return TimeUtils.getUtcUniDate(TimeUtils.getLocalDate(d), opts);
+	static localUniDate(d: Date = new Date(), opts: ZtimeOpts = {}): string {
+		return ZTime.utcUniDate(ZTime.localDate(d), opts);
 	}
 
-	static getLocalUniDateTime(d: Date = new Date(), opts: any = {}): string {
-		return TimeUtils.getUtcUniDateTime(TimeUtils.getLocalDate(d), opts);
+	static localUniDateTime(d: Date = new Date(), opts: ZtimeOpts = {}): string {
+		return ZTime.utcUniDateTime(ZTime.localDate(d), opts);
 	}
 
-	static getLocalCurrUniDate(opts: any = {}): string {
-		return TimeUtils.getUtcUniDate(TimeUtils.getLocalDate(), opts);
-	}
-
-	static getLocalCurrUniDateTime(opts: any = {}): string {
-		return TimeUtils.getUtcUniDateTime(TimeUtils.getLocalDate(), opts);
+	static localUniDateTimeMs(d: Date = new Date(), opts: ZtimeOpts = {}): string {
+		return ZTime.utcUniDateTimeMs(ZTime.localDate(d), opts);
 	}
 
 	
@@ -81,17 +74,21 @@ export class TimeUtils {
 	}
 
 	static isoString2UniDateTime(isoString: string): string {
-		return isoString.substr(0, 23).replace('T', ' ');
+		return isoString.substr(0, 19).replace('T', ' ');
 	}
 
-	static gregDate2Date(greg) {
+	static isoString2UniDateTimeMs(isoString: string): string {
+		return isoString.substr(0, 23).replace('T', ' ');
+	}
+  
+	static gregDate2Date(gregDate: string) {
 		const months = {
 			Jan: '01', Feb: '02', Mar: '03', Apr: '04', May: '05', Jun: '06',
 			Jul: '07', Aug: '08', Sep: '09', Oct: '10', Nov: '11', Dec: '12'
 		};
-		const year = greg.substr(8, 4);
-		const month = months[greg.substr(0, 3)];
-		const day = greg.substr(4, 2);
+		const year = gregDate.substr(8, 4);
+		const month = months[gregDate.substr(0, 3)];
+		const day = gregDate.substr(4, 2);
 		const uniDate = `${year}-${month}-${day}`;
 		let utcEpoch = (new Date(Date.UTC(Number(year), Number(month) - 1, Number(day), 0, 0, 0))).valueOf();
 		if (utcEpoch < 0) utcEpoch = 0;
@@ -115,11 +112,11 @@ export class TimeUtils {
 	}
 
 	static ms2UniTime(ms, opts?) {
-		return TimeUtils.seconds2UniTime(Math.round(ms / 1000), opts);
+		return ZTime.seconds2UniTime(Math.round(ms / 1000), opts);
 	}
 
 	// get time difference between now and a previous point in time. to be used in logs, etc.
 	static getMsDiffUniDateTime(localEpoch, opts?) {
-		return TimeUtils.ms2UniTime(Date.now() - localEpoch, opts);
+		return ZTime.ms2UniTime(Date.now() - localEpoch, opts);
 	}
 }

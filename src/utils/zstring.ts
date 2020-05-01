@@ -1,14 +1,12 @@
-
-export class StringUtils {
-	static getUniqueId() {
+export class ZString {
+	static uniqueStr(): string {
 		return String(Date.now()) + String(Math.round(Math.random() * 10000));
 	}
 
-	static getNumber(str) {
+	static toNumber(str: string): number {
 		const NUMERIC_REGEXP = /[-]{0,1}[\d.]*[\d]+/g;
-		const match = str.match(NUMERIC_REGEXP);
-		// return !match || match === '' ? 0 : parseInt(match, 10);
-		return !match || match === '' ? 0 : parseInt(match.join(''), 10);
+		const match: RegExpMatchArray | null = str.match(NUMERIC_REGEXP);
+		return !match || match.length === 0 ? 0 : parseInt(match.join(''), 10);
 	}
 
 	static encodeQuotes(str) {
@@ -21,7 +19,7 @@ export class StringUtils {
 	}
 
 	// taken from https://stackoverflow.com/questions/4009756/how-to-count-string-occurrence-in-string
-	static getOccurrences(string, subString, allowOverlapping = false) {
+	static occurrences(string, subString, allowOverlapping = false): number {
 		string += '';
 		subString += '';
 		if (subString.length <= 0) return (string.length + 1);
@@ -40,7 +38,7 @@ export class StringUtils {
 		return n;
 	}
 
-	static GetInitialCapital(str) {
+	static initialCapital(str) {
 		return str.charAt(0).toUpperCase() + str.substr(1);
 	}
 }

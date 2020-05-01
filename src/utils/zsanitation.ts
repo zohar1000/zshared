@@ -1,6 +1,6 @@
-import { SanitationInput } from '../models/sanitation.model';
+import { ZSanitationInput } from '../models/zsanitation-input.model';
 
-export class SanitationUtils {
+export class ZSanitation {
   static RegEx = {
     name: /^[a-zA-Z '-]+$/,
     userName: /^[0-9a-zA-Z_]+$/,
@@ -13,16 +13,16 @@ export class SanitationUtils {
   };
 
   static SANITIZERS = {
-    name:     { label: 'name',      minLen: 2, maxLen: 15, regEx: SanitationUtils.RegEx.name     },
-    userName: { label: 'user name', minLen: 2, maxLen: 15, regEx: SanitationUtils.RegEx.userName },
-    appName:  { label: 'app name',  minLen: 2, maxLen: 35, regEx: SanitationUtils.RegEx.appName  },
-    email:    { label: 'email',     minLen: 9, maxLen: 80, regEx: SanitationUtils.RegEx.email    },
-    link:     { label: 'link',      minLen: 9, maxLen: 80, regEx: SanitationUtils.RegEx.link     },
-    password: { label: 'password',  minLen: 6, maxLen: 30, regEx: SanitationUtils.RegEx.password },
-    text:     { label: 'text',      minLen: 0, maxLen: 10000, regEx: SanitationUtils.RegEx.text  }
+    name:     { label: 'name',      minLen: 2, maxLen: 15, regEx: ZSanitation.RegEx.name     },
+    userName: { label: 'user name', minLen: 2, maxLen: 15, regEx: ZSanitation.RegEx.userName },
+    appName:  { label: 'app name',  minLen: 2, maxLen: 35, regEx: ZSanitation.RegEx.appName  },
+    email:    { label: 'email',     minLen: 9, maxLen: 80, regEx: ZSanitation.RegEx.email    },
+    link:     { label: 'link',      minLen: 9, maxLen: 80, regEx: ZSanitation.RegEx.link     },
+    password: { label: 'password',  minLen: 6, maxLen: 30, regEx: ZSanitation.RegEx.password },
+    text:     { label: 'text',      minLen: 0, maxLen: 10000, regEx: ZSanitation.RegEx.text  }
   };
 
-  static sanitize(inputs: SanitationInput | SanitationInput[]) {
+  static sanitize(inputs: ZSanitationInput | ZSanitationInput[]) {
     let msg = '';
     if (Array.isArray(inputs)) {
       for (let i = 0, len = inputs.length; i < len && msg === ''; i++) {
@@ -34,7 +34,7 @@ export class SanitationUtils {
     return msg;
   }
 
-  static sanitizeInput(input: SanitationInput) {
+  static sanitizeInput(input: ZSanitationInput) {
     const sanitizer = this.SANITIZERS[input.name];
     const label = input.label || sanitizer.label;
     input.value = input.value.trim();
@@ -51,7 +51,7 @@ export class SanitationUtils {
     }
   }
 
-  static isValidByRegEx(value, regEx) {
+  static isValidByRegEx(value, regEx): Boolean {
     let isValid = true;
     if (Array.isArray(regEx)) {
       for (let i = 0, len = regEx.length; i < len && isValid; i++) {
@@ -64,6 +64,6 @@ export class SanitationUtils {
   }
 
   static setSanitationRegEx(name, value) {
-    SanitationUtils.RegEx[name] = value;
+    ZSanitation.RegEx[name] = value;
   }
 }
