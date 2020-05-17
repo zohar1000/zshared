@@ -1,7 +1,7 @@
 {
   "name": "zshared",
   "description": "useful common javascript/typescript utilities I collected over the years",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "lib",
   "types": "lib",
   "module": "es",
@@ -17,6 +17,10 @@
   },
   "scripts": {
     "build": "ts-hybrid-esm-build --clean",
+    "build-min": "npm run min-step1 && npm run min-step2-2015 && npm run min-step2-2017",
+    "min-step1": "rollup es/index.mjs --format umd --name \"zshared\" --file dist/zshared.js",
+    "min-step2-2015": "terser dist/zshared.js --compress --mangle --output dist/zshared-2015.min.js --ecma 2015 --keep-classnames --keep-fnames",
+    "min-step2-2017": "terser dist/zshared.js --compress --mangle --output dist/zshared-2017.min.js --ecma 2017 --keep-classnames --keep-fnames",
     "old-build": "tsc",
     "preversion": "npm run lint",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -29,7 +33,8 @@
   },
   "files": [
     "lib/**/*",
-    "es/**/*"
+    "es/**/*",
+    "dist/zshared.min.js"
   ],
   "keywords": [],
   "author": "",
@@ -39,6 +44,8 @@
   },
   "homepage": "https://github.com/zohar1000/zutilities",
   "devDependencies": {
+    "rollup": "^2.7.6",
+    "terser": "^4.6.13",
     "ts-hybrid-esm-build": "^0.2.3"
   }
 }

@@ -82,7 +82,7 @@ ZString.initialCapital('good morning');  // output: 'Good morning'
 ```
 
 #### logt
-the libraray contains also static function 'logt', it prints to the console the message prefixed by the time
+the libraray contains also a static function 'logt', it prints to the console the message prefixed by the time
 ```sh
 logt('some', 'message', 1000);  // output: 2020-04-29 23:39:12.397 ==> some message 1000
 ```
