@@ -1,7 +1,7 @@
 {
   "name": "zshared",
   "description": "useful common javascript/typescript utilities I collected over the years",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "lib",
   "types": "lib",
   "module": "es",
@@ -29,7 +29,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/zohar1000/zutilities.git"
+    "url": "https://github.com/zohar1000/zshared.git"
   },
   "files": [
     "lib/**/*",
@@ -40,9 +40,9 @@
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/zohar1000/zutilities/issues"
+    "url": "https://github.com/zohar1000/zshared/issues"
   },
-  "homepage": "https://github.com/zohar1000/zutilities",
+  "homepage": "https://github.com/zohar1000/zshared",
   "devDependencies": {
     "rollup": "^2.7.6",
     "terser": "^4.6.13",
