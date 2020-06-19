@@ -1,7 +1,7 @@
 {
   "name": "zshared",
   "description": "useful common javascript/typescript utilities I collected over the years",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "main": "lib",
   "types": "lib",
   "module": "es",

@@ -27,13 +27,13 @@ await ZTime.sleep(1000);  // wait 1 second
 
 get local/utc time in universal format, local time zone GMT+3
 ```sh
-ZTime.utcUniDateTime();     // output: 2020-04-29 17:29:20
-ZTime.localUniDateTime();   // output: 2020-04-29 20:29:20
+ZTime.utcUniDateTime();     // returns '2020-04-29 17:29:20'
+ZTime.localUniDateTime();   // returns '2020-04-29 20:29:20'
 ```
 
 convert seconds to display time (hh:mm:ss) 
 ```sh
-ZTime.seconds2UniTime(3500) // output: 33:20
+ZTime.seconds2UniTime(3500) // returns '33:20'
 ```
 
 #### Objects
@@ -44,47 +44,47 @@ ZObj.clone(obj1, ['a', 'c']);  // pass keys array, returns: { a: 1, c: 3 };
 ```
 
 ```sh
-ZObj.areEquals(obj1, { a: 1, b: 2 });  // output: false
-ZObj.areEquals(obj1, { a: 1, b: 2, c: 3 });  // output: true
+ZObj.areEquals(obj1, { a: 1, b: 2 });  // returns false
+ZObj.areEquals(obj1, { a: 1, b: 2, c: 3 });  // returns true
 ```
 
 #### Arrays
 ```sh
 items = ['a', 'b', 'a', 'c'];
-ZArray.distincts(items);  // output: ['a', 'b', 'c'];
+ZArray.distincts(items);  // returns ['a', 'b', 'c'];
 ZArray.deleteItem(items, 'b');  // items is now ['a', 'a', 'c'];
 ```
 
 ```sh
 items = ['a', 'b', 'c'];
-ZArray.toObj(items);  // output: { a: 'a', b: 'b', c: 'c' };
-ZArray.toObj(items, item => '_' + item);  // pass a function, output: { a: '_a', b: '_b', c: '_c' };
+ZArray.toObj(items);  // returns { a: 'a', b: 'b', c: 'c' };
+ZArray.toObj(items, item => '_' + item);  // pass a function, returns { a: '_a', b: '_b', c: '_c' };
 ```
 
 convert items array to objects
 ```sh
 items = [{ a: 1 }, { b: 2 }]; 
-ZArray.toObj(items);  // output: { a: 1, b: 2 };
-ZArray.toObj(items, (key, value) => value * 2);  // pass a function, output: { a: 2, b: 4 };
+ZArray.toObj(items);  // returns { a: 1, b: 2 };
+ZArray.toObj(items, (key, value) => value * 2);  // pass a function, returns { a: 2, b: 4 };
 ```
 
 #### Numbers
 ```sh
-ZNumber.thousandsSep(12345);  // output: 12,345 or 12.345, depends on locale
+ZNumber.thousandsSep(12345);  // returns 12,345 or 12.345, depends on locale
 ```
 
 #### Strings
 ```sh
 const str = '2 cats met another cat';
-ZString.replaceAll(str, 'cat', 'dog');   // output: '2 dogs met another dog'
-ZString.occurrences(str, 'cat');         // output: 2
-ZString.initialCapital('good morning');  // output: 'Good morning'
+ZString.replaceAll(str, 'cat', 'dog');   // returns '2 dogs met another dog'
+ZString.occurrences(str, 'cat');         // returns 2
+ZString.initialCapital('good morning');  // returns 'Good morning'
 ```
 
 #### logt
-the libraray contains also a static function 'logt', it prints to the console the message prefixed by the time
+the libraray contains also a static function 'logt', it acts like console.log() with a time prefix
 ```sh
-logt('some', 'message', 1000);  // output: 2020-04-29 23:39:12.397 ==> some message 1000
+logt('some message', 1200, 'another message');  // output: 2020-04-29 23:39:12.397 ==> some message 1200 another message
 ```
 
 
