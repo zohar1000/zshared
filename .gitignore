@@ -4,6 +4,8 @@ dist
 node_modules
 notes
 package-lock.json
+notes
+scripts
 
 # IDE - VSCode
 .idea
