@@ -79,6 +79,7 @@ const str = '2 cats met another cat';
 ZString.replaceAll(str, 'cat', 'dog');   // returns '2 dogs met another dog'
 ZString.occurrences(str, 'cat');         // returns 2
 ZString.initialCapital('good morning');  // returns 'Good morning'
+ZString.replaceParams('I say {0} {1} and {0}', 'bla', 'gla);  // returns 'I say bla gla and bla'
 ```
 
 #### logt

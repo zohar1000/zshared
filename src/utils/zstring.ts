@@ -41,4 +41,13 @@ export class ZString {
 	static initialCapital(str) {
 		return str.charAt(0).toUpperCase() + str.substr(1);
 	}
+
+	static replaceParams(...params) {
+		let str = params.shift();
+		for (let i = 0, len = params.length; i < len; i++) {
+			const regExp = new RegExp('\\{' + i + '\\}', 'g');
+			str = str.replace(regExp, params[i]);
+		}
+		return str;
+	}
 }
